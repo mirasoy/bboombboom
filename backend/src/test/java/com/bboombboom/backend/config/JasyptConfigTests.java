@@ -16,12 +16,14 @@ public class JasyptConfigTests {
     public void jastypt() {
         StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
         
-        String password = "password";
-        String plainText = "plainText";
+        String password = "b4mr";
+        String plainText = "jdbc:mariadb://localhost:3306/b4bd";
         
         pbeEnc.setAlgorithm("PBEWithMD5AndDES");
         pbeEnc.setPassword(password);
         String enc = pbeEnc.encrypt(plainText);
         logger.info(enc);
+        logger.info(pbeEnc.encrypt("mira"));
+        logger.info(pbeEnc.encrypt("Mira7838"));
     }
 }

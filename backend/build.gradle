@@ -18,6 +18,8 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//lombok
+	implementation 'org.projectlombok:lombok'	
     // SLF4J API
     implementation 'org.slf4j:slf4j-api:1.7.32'
     // SLF4J binding 

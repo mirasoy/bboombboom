@@ -1,0 +1,52 @@
+body {
+    display: block;
+    margin: 0px;
+}
+
+.main-title {
+    text-align: center;
+}
+
+.diary {
+    display: flex;
+    border-bottom: solid gray;
+    padding: 1em 0 1em 0;
+}
+
+.diary-title-box {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.arrow-img-sm {
+    height: 2em;
+    margin-right: 1em;
+}
+
+.submit-button {
+    background-color: #5479b8;
+    color: white;
+    border: none;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    margin: 1em;
+    float: right;
+    display: flex;
+}
+
+.checked-img-sm {
+    margin-left: 1em;
+}
+.form-body{
+    margin: 0 14% 0 14%;
+}
+
+.form-line{
+    text-align: right;
+}
+
+.input-text{
+    width: 12em;
+    margin: 0.5em;
+}
