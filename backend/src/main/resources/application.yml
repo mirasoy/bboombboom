@@ -1,12 +1,13 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://127.0.0.1:3326/b4db
-    username: mira
-    password: Mira7838
+    url: ENC(jXaSRmzI27BdK+gbrxrvzQK8uzc2Xs5K0GRfWllXaoe7ubsutqcm3mc+/l8j35+D)
+    username: ENC(Febk40BIMGIOcC89rfiHQg==)
+    password: ENC(mnVTjMrY+U9HSJZUlMxR8G0OGpksj6Mz)
   sql :
     init :
-      mode : always
+      #data.sql(더미데이터) 사용부분 미사용시 삭제
+      mode : always  
   jpa:
     open-in-view: false
     generate-ddl: true

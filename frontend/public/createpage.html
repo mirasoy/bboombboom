@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>기록작성</title>
+  <link rel="stylesheet" href="/style/common.css"/>
+  
+</head>
+<body>
+  <div class="main-title">
+    <h1>기록작성</h1>
+  </div>
+  <form>
+    <div class="form-body">
+      <div class="form-line">
+        <label class="input-lebel">날짜<input type="date" name="date" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">사료량<input type="text" name="feed" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">음수량<input type="text" name="water" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">대변<input type="text" name="feces" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">소변<input type="text" name="urin" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">구토여부<input type="text" name="vomitin" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">투약기록<input type="text" name="medication" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">특이사항<input type="text" name="specialNote" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">몸무게<input type="text" name="weight" class="input-text"></label>
+      </div>
+     
+    </div>
+    <button class="submit-button" id="save-diary-btn"><span>저장하기</span><img class="checked-img-sm" src="./assets/checked.png">
+  </form>
+  
+  <script>
+      const urlParams = new URL(location.href).searchParams;
+      const diaryId = urlParams.get("id");
+
+
+    document.addEventListener('submit', function (event) {
+
+      event.preventDefault();
+
+      fetch('diary/'+diaryId+'/dailyRecord', {
+        method: 'POST',
+        body: JSON.stringify(serializeForm(event.target)),          
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8'
+        }
+      }).then(function (response) {
+        if (response.ok) {
+          return location.href = "/book.html?id="+diaryId;
+        }
+        return Promise.reject(response);
+      }).catch(function (error) {
+        console.log(error);
+        alert('저장에 실패하였습니다.');
+      });
+    });
+
+
+    var serializeForm = function (form) {
+      var obj = {};
+      var formData = new FormData(form);
+      for (var key of formData.keys()) {
+        obj[key] = formData.get(key);
+      }
+      return obj;
+    };
+    
+  </script>
+</body>

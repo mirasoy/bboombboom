@@ -15,18 +15,19 @@
 <div class="diary-list" id="diary-list">
   <div class="diary">
     <div class="diary-title-box"><span class="diary-title">냥냥1 다이어리</span></div>
-    <img  class="arrow-img-sm" src="./assets/arrow.png">
+    <img  class="arrow-img-sm" src="./assets/right-arrow.png">
   </div> 
 </div>
 <div>
   <button class="submit-button" id="new-diary-btn"><span>새 다이어리 만들기</span><img  class="checked-img-sm" src="./assets/checked.png">
 </div>
 
-
 <script>
-  document.getElementById("new-diary-btn").onclick = function(){location.href = "/createbook.html"};  
+  
+  document.getElementById("new-diary-btn").addEventListener('click', function (e) {
+      location.href = "/createbook.html"
+  });
 
-  const xhr = new XMLHttpRequest();  
 
   let diaryText = '';
   fetch('/diaries', {
@@ -38,12 +39,11 @@
 		return Promise.reject(response);
 	}).then(function (data) {
     data.forEach(element => {
-        diaryText += '<div class="diary">'+
+        diaryText += '<div class="diary" onclick="location.href =\'/book.html?id='+element.diaryId+'\'">'+
                       '<div class="diary-title-box"><span class="diary-title">'+element.name+'의 다이어리</span></div>'+
                       '<img  class="arrow-img-sm" src="./assets/right-arrow.png">'+  
                       '</div>';          
-      }); 
-		console.log(data);
+      }); 		
 	}).catch(function (error) {
 		diaryText = "<h4>다이어리를 불러오는데 실패하였습니다.</h4>"
 	}).finally(function(){
