@@ -9,7 +9,7 @@
 
 ```bash
 docker pull mariadb
-docker run --restart unless-stopped --name bboomboom -p 3306:3306 -e MARIADB_ROOT_PASSWORD=my-secret-pw -d mariadb:latest
+docker run --restart unless-stopped --name bboombboom -p 3306:3306 -e MARIADB_ROOT_PASSWORD=my-secret-pw -d mariadb:latest mariadb
 ```
 2. Docker 접속
 

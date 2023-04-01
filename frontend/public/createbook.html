@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>새 다이어리 만들기</title>
+  <link rel="stylesheet" href="/style/common.css"/>
+  
+</head>
+<body>
+  <div class="main-title">
+    <h1>새 다이어리 만들기</h1>
+  </div>
+  <form>
+    <div class="form-body">
+      <div class="form-line">
+        <label class="input-lebel">이름<input type="text" name="name" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">종<input type="text" name="breeds" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">생년월일<input type="date" name="birthDate" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">몸무게<input type="text" name="weight" class="input-text"></label>
+      </div>
+      <div class="form-line">
+        <label class="input-lebel">특이사항<input type="text" name="specialNote" class="input-text"></label>
+      </div>
+    </div>
+    <button class="submit-button" id="save-diary-btn"><span>저장하기</span><img class="checked-img-sm" src="./assets/checked.png">
+  </form>
+  
+    <script>
+      document.addEventListener('submit', function (event) {
+
+        event.preventDefault();
+
+        fetch('/diary', {
+          method: 'POST',
+          body: JSON.stringify(serializeForm(event.target)),          
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+        }).then(function (response) {
+          if (response.ok) {
+            return response.json();
+          }
+          return Promise.reject(response);
+        }).then(function (data) {
+           //TO_DO : book.html 페이지로 이동
+        }).catch(function (error) {
+          alert('저장에 실패하였습니다.');
+        });
+      });
+
+
+      var serializeForm = function (form) {
+        var obj = {};
+        var formData = new FormData(form);
+        for (var key of formData.keys()) {
+          obj[key] = formData.get(key);
+        }
+        return obj;
+      };
+      
+    </script>
+</body>
