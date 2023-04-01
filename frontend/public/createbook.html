@@ -50,8 +50,9 @@
           }
           return Promise.reject(response);
         }).then(function (data) {
-           //TO_DO : book.html 페이지로 이동
+          location.href = "/book.html?id="+data.diaryId;
         }).catch(function (error) {
+          console.log(error);
           alert('저장에 실패하였습니다.');
         });
       });

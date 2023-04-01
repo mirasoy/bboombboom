@@ -38,15 +38,42 @@ body {
 .checked-img-sm {
     margin-left: 1em;
 }
-.form-body{
+
+.form-body {
     margin: 0 14% 0 14%;
+    padding: 1em;
 }
 
-.form-line{
+.form-line {
     text-align: right;
 }
 
-.input-text{
+.input-text {
     width: 12em;
     margin: 0.5em;
+}
+
+.button-div {
+    display: flow-root;
+}
+
+.table-body {
+    margin: 0.5em;
+    overflow: scroll;
+    height: 40em;
+}
+
+#record-table {
+    min-width: 35em;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+#record-table thead{
+    background-color: rgb(201, 201, 201);
+}
+
+#record-table td {
+    width: 10em;
+    border: 1px solid #444444;
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title></title>
+  <link rel="stylesheet" href="/style/common.css"/>
+</head>
+<body>
+<div class="main-title">
+  <h1 id="title"></h1>
+</div>
+<div class="button-div">
+  <button class="submit-button" id="new-record-btn"><span>기록 작성</span><img  class="checked-img-sm" src="./assets/checked.png">
+</div>
+<div class="table-body">
+  <table id="record-table">
+    <colgroup>
+      <col width="15%">
+      <col width="11%">
+      <col width="11%">
+      <col width="11%">
+      <col width="11%">
+      <col width="11%">
+      <col width="15%">
+      <col width="15%">
+    </colgsroup>
+      <thead>
+        <tr>
+          <td>날짜</td>
+          <td>사료량</td>
+          <td>음수량</td>
+          <td>대변량</td>
+          <td>소변량</td>
+          <td>구토</td>
+          <td>투약기록</td>
+          <td>특이사항</td>
+        </tr>
+      </thead>
+      <tbody id="record-tbody">
+
+      </tbody>
+  </table>
+
+</div>
+
+
+<script>
+  
+  const urlParams = new URL(location.href).searchParams;
+  const diaryId = urlParams.get("id");
+
+
+  document.getElementById("new-record-btn").addEventListener('click', function (e) {
+    location.href = "/createpage.html?id="+diaryId
+  });
+
+  let titleText = "";
+  fetch("/diary/"+diaryId, {
+		method: "GET",		
+	}).then(function (response) {
+		if (response.ok) {
+			return response.json();
+		}
+		return Promise.reject(response);
+	}).then(function (diary) {    
+    titleText = diary.name+"의 다이어리";
+	}).catch(function (error) {
+    console.log(error);
+		titleText = "존재하지 않는 다이어리"
+	}).finally(function(){
+    document.getElementById("title").innerHTML = titleText;
+    document.title = titleText;
+  });
+
+  fetch("/diary/"+diaryId+"/dailyRecords", {
+		method: "GET",		
+	}).then(function (response) {
+		if (response.ok) {
+			return response.json();
+		}
+		return Promise.reject(response);
+	}).then(function (data) {
+    data.forEach(record => {
+      addTableRow(record);
+    });    
+	}).catch(function (error) {
+    console.log(error);
+		
+	}).finally(function(){
+    
+  });
+
+  const tableHead = ["date","feed","water","feces","urin", "vomitin", "medication", "specialNote"]
+  function addTableRow(record){
+    let tbody = document.getElementById("record-tbody");
+    let row = tbody.insertRow();
+    for(let i = 0; i < tableHead.length ; i++){
+      let newCell = row.insertCell(i);
+      newCell.innerHTML = record[tableHead[i]];
+    }
+  }
+
+</script>
+</body>
